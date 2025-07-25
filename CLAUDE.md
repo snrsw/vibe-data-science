@@ -56,6 +56,10 @@ The main dataset (`penguins_size.csv`) contains the following columns:
 
 See detailed column descriptions in `docs/datasets.md`.
 
+## Problem Definition
+
+See `docs/problem.md` for the problem statement, inputs, outputs, and evaluation metrics.
+
 ## Technology Stack
 
 - Python 3.11+
