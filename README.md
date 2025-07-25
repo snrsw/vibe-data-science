@@ -8,6 +8,14 @@
 uv sync
 ```
 
+### Download datasets
+
+```bash
+uv run kaggle datasets download amulyas/penguin-size-dataset
+```
+
+## How to develop
+
 ### Linting
 
 ```bash
