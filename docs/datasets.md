@@ -16,6 +16,14 @@
 | body_mass_g | Int64 | 342 | 2 | 95 |
 | sex | String | 333 | 11 | 3 |
 
+* species: Penguin species (Adelie, Chinstrap, Gentoo)
+* island: Location (Torgersen, Biscoe, Dream)
+* culmen_length_mm: Culmen length in millimeters
+* culmen_depth_mm: Culmen depth in millimeters
+* flipper_length_mm: Flipper length in millimeters
+* body_mass_g: Body mass in grams
+* sex: Biological sex (male, female)
+
 ### species
 
 - **Type**: String

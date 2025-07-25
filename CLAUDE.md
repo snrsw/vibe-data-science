@@ -54,6 +54,8 @@ The main dataset (`penguins_size.csv`) contains the following columns:
 - body_mass_g: Body mass in grams
 - sex: Sex of the penguin (MALE, FEMALE, NA)
 
+See detailed column descriptions in `docs/datasets.md`.
+
 ## Technology Stack
 
 - Python 3.11+
