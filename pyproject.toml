@@ -1,10 +1,10 @@
 [project]
 name = "vibe-data-science"
 version = "0.1.0"
-description = "Add your description here"
+description = "Vibe Data Science project"
 readme = "README.md"
 authors = [
-    { name = "snrsw", email = "ale.nnn.r@gmail.com" }
+    { name = "snrsw", email = "xxx@yyy.com" }
 ]
 requires-python = ">=3.11"
 dependencies = [
@@ -12,6 +12,9 @@ dependencies = [
     "mlflow>=3.1.4",
     "polars>=1.31.0",
     "pydantic>=2.11.7",
+    "structlog>=25.4.0",
+    "rich>=14.1.0",
+    "dbt-duckdb>=1.9.4",
 ]
 
 [build-system]
@@ -21,4 +24,5 @@ build-backend = "hatchling.build"
 [dependency-groups]
 dev = [
     "kaggle>=1.7.4.5",
+    "pytest>=8.4.1",
 ]

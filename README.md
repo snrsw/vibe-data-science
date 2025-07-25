@@ -34,5 +34,5 @@ uvx ty check .
 ### Testing
 
 ```bash
-uvx pytest tests
+uv run pytest tests
 ```

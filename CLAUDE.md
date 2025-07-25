@@ -31,10 +31,10 @@ uvx ruff check . --fix
 uvx ty check .
 
 # Run tests
-uvx pytest tests
+uv run pytest tests
 
 # Run single test
-uvx pytest tests/path_to_test.py::test_function_name
+uv run pytest tests/path_to_test.py::test_function_name
 ```
 
 ## Project Structure
@@ -69,5 +69,14 @@ The main dataset (`penguins_size.csv`) contains the following columns:
 * Use pydantic.BaseModel rather than dataclasses and classes.
 * Use immutable data structures as much as possible.
 * Use functional programming techniques where appropriate.
-* Use t-wada's TDD style (see Japanese resources for more details).
 * Use mlflow for model tracking and management.
+* Use python 3.10+ features such as type hints, f-strings, and match statements (Do not use List and Dict like annotations).
+* Do not use comments to explain code. Instead, use descriptive variable and function names.
+* Use explicit named arguments for function calls.
+* Use structured logging with the `structlog` module, do not use print statements for debugging.
+
+## Development Workflow
+
+* Use t-wada's TDD style (see Japanese resources for more tdetails).
+* Plan first, then implement if the owner agrees with the plan.
+* Check linting and type checking before committing code.
