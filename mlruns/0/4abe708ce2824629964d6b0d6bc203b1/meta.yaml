@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/0/4abe708ce2824629964d6b0d6bc203b1/artifacts
+end_time: 1753515061986
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4abe708ce2824629964d6b0d6bc203b1
+run_name: bouncy-asp-173
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753515061632
+status: 3
+tags: []
+user_id: jmb20230001

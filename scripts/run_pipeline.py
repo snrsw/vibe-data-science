@@ -7,8 +7,8 @@ python scripts/run_pipeline.py configs/pipelines/optimized_random_forest.yaml
 """
 
 import sys
-from vibe_data_science.main import run_command
-from vibe_data_science.main import Settings
+from vibe_data_science.ml.main import run_command
+from vibe_data_science.ml.main import Settings
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -23,4 +23,3 @@ if __name__ == "__main__":
     )
 
     run_command(settings)
-

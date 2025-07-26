@@ -2,7 +2,7 @@
 import sys
 import structlog
 from pathlib import Path
-from typing import Optional, List
+from typing import Optional
 from enum import Enum
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -79,7 +79,7 @@ def run_command(settings: Settings) -> None:
     if not settings.config_name_or_path:
         print("Error: config_name_or_path is required for the run command")
         print(
-            "Usage: python -m vibe_data_science.main run --config-name-or-path=<config_name_or_path>"
+            "Usage: python -m vibe_data_science.ml.main run --config-name-or-path=<config_name_or_path>"
         )
         sys.exit(1)
 
@@ -131,7 +131,7 @@ def main() -> None:
     args = sys.argv[1:] if len(sys.argv) > 1 else ["--help"]
 
     if args[0] == "--help" or args[0] == "-h":
-        print("Usage: python -m vibe_data_science.main [command] [options]")
+        print("Usage: python -m vibe_data_science.ml.main [command] [options]")
         print("\nCommands:")
         print(
             "  run   Run a machine learning pipeline with the specified configuration"
@@ -175,4 +175,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
