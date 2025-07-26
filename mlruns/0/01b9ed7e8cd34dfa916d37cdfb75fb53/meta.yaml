@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/0/01b9ed7e8cd34dfa916d37cdfb75fb53/artifacts
+end_time: 1753510119164
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 01b9ed7e8cd34dfa916d37cdfb75fb53
+run_name: classy-frog-648
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753510118717
+status: 3
+tags: []
+user_id: jmb20230001

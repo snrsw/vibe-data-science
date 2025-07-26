@@ -1,0 +1,22 @@
+artifact_path: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/144014724387327659/models/m-6b0d35021eab4ecdb28c7deeddef8e6e/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.1
+mlflow_version: 3.1.4
+model_id: m-6b0d35021eab4ecdb28c7deeddef8e6e
+model_size_bytes: 220512
+model_uuid: m-6b0d35021eab4ecdb28c7deeddef8e6e
+prompts: null
+run_id: 4f33f602e7ac4676a8cfadd0515dcd66
+utc_time_created: '2025-07-26 04:59:16.657377'
