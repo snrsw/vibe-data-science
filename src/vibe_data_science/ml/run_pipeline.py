@@ -13,7 +13,6 @@ from vibe_data_science.ml.pipeline.training import (
 )
 
 
-# Configure structured logging
 structlog.configure(
     processors=[
         structlog.processors.TimeStamper(fmt="%Y-%m-%d %H:%M.%S"),
@@ -27,7 +26,6 @@ logger = structlog.get_logger()
 def main() -> None:
     logger.info("starting_penguin_classification_pipeline")
 
-    # Define configuration
     pipeline_config = PipelineConfig(
         dataset=DatasetConfig(
             filepath="data/penguins_size.csv",
@@ -69,7 +67,7 @@ def main() -> None:
         ),
         split=SplitConfig(
             test_ratio=0.2,
-            validation_ratio=0.0,  # Not using validation set in this example
+            validation_ratio=0.0,
             random_seed=42,
         ),
         experiment=ExperimentConfig(
@@ -78,10 +76,7 @@ def main() -> None:
         ),
     )
 
-    # Run the pipeline
     _, metrics = run_pipeline(pipeline_config)
-
-    # Print results
     logger.info(
         "pipeline_results",
         accuracy=metrics.metrics.get("accuracy"),

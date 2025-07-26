@@ -55,18 +55,14 @@ def train_test_split(
         random_seed=config.random_seed,
     )
 
-    # Shuffle the dataframe
     shuffled_df = df.sample(fraction=1.0, seed=config.random_seed)
 
-    # Extract target column
     target = shuffled_df[target_column]
     features_df = shuffled_df.drop(target_column)
 
-    # Calculate split indices
     total_rows = features_df.shape[0]
     test_size = int(total_rows * config.test_ratio)
 
-    # Split into train and test
     X_train = features_df.slice(test_size, total_rows - test_size)
     y_train = target.slice(test_size, total_rows - test_size)
     X_test = features_df.slice(0, test_size)
@@ -86,32 +82,24 @@ def run_pipeline(config: PipelineConfig) -> tuple[Any, MetricsResult]:
         model_type=config.model.model_type,
     )
 
-    # Load dataset
     dataset = load_dataset(config.dataset)
 
-    # Split dataset
     X_train, y_train, X_test, y_test = train_test_split(
         dataset, config.dataset.target_column, config.split
     )
 
-    # Preprocess data
     X_train_processed = preprocess_dataset(X_train, config.preprocessing)
     X_test_processed = preprocess_dataset(X_test, config.preprocessing)
 
-    # Extract features
     X_train_features = extract_features(X_train_processed, config.features)
     X_test_features = extract_features(X_test_processed, config.features)
 
-    # Train model
     model = train_model(X_train_features, y_train, config.model)
 
-    # Evaluate model
     metrics = evaluate_model(model, X_test_features, y_test, config.evaluation)
 
-    # Log experiment
     log_experiment(config.experiment, config.model.hyperparameters, metrics)
 
-    # Log model
     model_name = f"{config.model.model_type}_{config.experiment.run_name}"
     log_model(model, model_name)
 

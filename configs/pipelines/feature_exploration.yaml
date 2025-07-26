@@ -1,0 +1,47 @@
+dataset:
+  filepath: "data/penguins_size.csv"
+  target_column: "species"
+  null_values: ["NA", "."]
+
+preprocessing:
+  categorical_features: ["island", "sex"]
+  numeric_features:
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  fill_strategy: "mean"
+
+features:
+  features_to_use:
+    - "island_encoded"
+    - "sex_encoded"
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+    - "culmen_length_mm_norm"
+    - "culmen_depth_mm_norm"
+    - "flipper_length_mm_norm"
+    - "body_mass_g_norm"
+  normalize: true
+
+model:
+  model_type: "random_forest"
+  hyperparameters:
+    n_estimators: 150
+    max_depth: 12
+    random_state: 42
+
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1"]
+  average: "macro"
+
+split:
+  test_ratio: 0.2
+  validation_ratio: 0.0
+  random_seed: 42
+
+experiment:
+  experiment_name: "penguin_feature_exploration"
+  run_name: "normalized_features"
