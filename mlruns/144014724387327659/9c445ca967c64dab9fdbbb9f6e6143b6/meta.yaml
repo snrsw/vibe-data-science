@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/144014724387327659/9c445ca967c64dab9fdbbb9f6e6143b6/artifacts
+end_time: 1753520283703
+entry_point_name: ''
+experiment_id: '144014724387327659'
+lifecycle_stage: active
+run_id: 9c445ca967c64dab9fdbbb9f6e6143b6
+run_name: svm_svm_linear_log
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753520281774
+status: 3
+tags: []
+user_id: jmb20230001

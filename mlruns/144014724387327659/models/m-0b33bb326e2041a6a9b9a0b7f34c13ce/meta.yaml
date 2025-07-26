@@ -1,0 +1,10 @@
+artifact_location: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/144014724387327659/models/m-0b33bb326e2041a6a9b9a0b7f34c13ce/artifacts
+creation_timestamp: 1753520281781
+experiment_id: '144014724387327659'
+last_updated_timestamp: 1753520283701
+model_id: m-0b33bb326e2041a6a9b9a0b7f34c13ce
+model_type: null
+name: svm_svm_linear
+source_run_id: 9c445ca967c64dab9fdbbb9f6e6143b6
+status: 2
+status_message: null

@@ -43,11 +43,11 @@ uv run python -m vibe_data_science.ml.main run optimized_forest
 
 ### Running with YAML Configuration Files
 
-The project supports configuration via YAML files located in `configs/pipelines/`:
+The project supports configuration via YAML files located in the `./configs/pipelines/` directory:
 
 ```bash
-uv run python -m vibe_data_science.ml.main run configs/pipelines/optimized_random_forest.yaml
-uv run python -m vibe_data_science.ml.main run configs/pipelines/svm_linear.yaml
+uv run python -m vibe_data_science.ml.main run ./configs/pipelines/optimized_random_forest.yaml
+uv run python -m vibe_data_science.ml.main run ./configs/pipelines/svm_linear.yaml
 ```
 
 Available configuration files:

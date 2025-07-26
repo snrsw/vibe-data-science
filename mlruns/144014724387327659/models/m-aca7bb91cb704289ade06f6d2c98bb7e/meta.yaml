@@ -1,0 +1,10 @@
+artifact_location: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/144014724387327659/models/m-aca7bb91cb704289ade06f6d2c98bb7e/artifacts
+creation_timestamp: 1753520291749
+experiment_id: '144014724387327659'
+last_updated_timestamp: 1753520293595
+model_id: m-aca7bb91cb704289ade06f6d2c98bb7e
+model_type: null
+name: random_forest_random_forest_pipeline
+source_run_id: 7fca53c61b354a09bab0604dc5f235c7
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/814251661916464625/2f7c928dd4d54c28bf6ee9bec089a93d/artifacts
+end_time: 1753520330507
+entry_point_name: ''
+experiment_id: '814251661916464625'
+lifecycle_stage: active
+run_id: 2f7c928dd4d54c28bf6ee9bec089a93d
+run_name: random_forest_random_forest_optimized_log
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753520328642
+status: 3
+tags: []
+user_id: jmb20230001

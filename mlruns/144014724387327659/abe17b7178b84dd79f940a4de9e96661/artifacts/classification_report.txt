@@ -1,0 +1,8 @@
+              precision    recall  f1-score   support
+
+      Adelie       1.00      0.88      0.94        68
+   Chinstrap       0.00      0.00      0.00         0
+
+    accuracy                           0.88        68
+   macro avg       0.50      0.44      0.47        68
+weighted avg       1.00      0.88      0.94        68

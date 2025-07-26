@@ -148,21 +148,29 @@ def main() -> None:
 
     command = args[0] if args[0] in [c.value for c in Command] else Command.RUN.value
 
-    # Parse arguments into format for pydantic settings
-    formatted_args = [f"--command={command}"]
+    # Parse arguments is handled in the settings_dict creation below
 
-    for i in range(1, len(args)):
-        arg = args[i]
+    # Convert command-line arguments to dictionary format for pydantic settings
+    settings_dict = {"command": command}
+
+    # Extract other command-line arguments
+    for arg in args[1:]:
         if arg.startswith("--"):
-            formatted_args.append(arg)
-        elif i > 0 and not args[i - 1].startswith("--"):
-            # This is likely a positional argument for a command
-            if command == Command.RUN.value:
-                formatted_args.append(f"--config-name-or-path={arg}")
-            elif command == Command.LIST.value:
-                formatted_args.append(f"--config-type={arg}")
+            if "=" in arg:
+                key, value = arg.lstrip("-").split("=", 1)
+                settings_dict[key] = value
+            else:
+                key = arg.lstrip("-")
+                settings_dict[key] = True
+        # Handle positional arguments
+        elif (
+            command == Command.RUN.value and "config_name_or_path" not in settings_dict
+        ):
+            settings_dict["config_name_or_path"] = arg
+        elif command == Command.LIST.value and "config_type" not in settings_dict:
+            settings_dict["config_type"] = arg
 
-    settings = Settings.model_validate({"command": command})
+    settings = Settings.model_validate(settings_dict)
 
     if command == Command.RUN.value:
         run_command(settings)
