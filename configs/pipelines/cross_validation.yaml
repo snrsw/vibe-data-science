@@ -1,0 +1,49 @@
+dataset:
+  filepath: "data/penguins_size.csv"
+  target_column: "species"
+  null_values: ["NA", "."]
+
+preprocessing:
+  categorical_features: ["island", "sex"]
+  numeric_features:
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  fill_strategy: "median"
+
+features:
+  features_to_use:
+    - "island_encoded"
+    - "sex_encoded"
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  normalize: true
+
+model:
+  model_type: "random_forest"
+  hyperparameters:
+    n_estimators: 200
+    max_depth: 15
+    random_state: 42
+
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1"]
+  average: "macro"
+
+# Configuration for cross-validation instead of a single train-test split
+split:
+  # Set test_ratio to 0 to use cross-validation instead
+  test_ratio: 0.0
+  validation_ratio: 0.0
+  # Number of folds for cross-validation
+  cv_folds: 5
+  # Whether to use stratified folds (recommended for classification)
+  stratified: true
+  random_seed: 42
+
+experiment:
+  experiment_name: "penguin_cross_validation"
+  run_name: "random_forest_cv"

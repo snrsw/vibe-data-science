@@ -30,6 +30,9 @@ class SplitConfig(BaseModel):
     test_ratio: float = 0.2
     validation_ratio: float = 0.2
     random_seed: int = 42
+    # Optional parameters for cross-validation
+    cv_folds: int | None = None
+    stratified: bool = True
 
     model_config = {"frozen": True}
 

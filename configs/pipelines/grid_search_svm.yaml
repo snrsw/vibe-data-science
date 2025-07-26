@@ -1,0 +1,51 @@
+dataset:
+  filepath: "data/penguins_size.csv"
+  target_column: "species"
+  null_values: ["NA", "."]
+
+preprocessing:
+  categorical_features: ["island", "sex"]
+  numeric_features:
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  fill_strategy: "median"
+
+features:
+  features_to_use:
+    - "island_encoded"
+    - "sex_encoded"
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  normalize: true
+
+model:
+  model_type: "svm"
+  # This model will be used as the base for grid search
+  hyperparameters:
+    random_state: 42
+  # Grid search parameters
+  grid_search:
+    param_grid:
+      C: [0.1, 1.0, 10.0]
+      kernel: ["linear", "rbf"]
+      gamma: ["scale", "auto", 0.1]
+    cv: 3
+    scoring: "accuracy"
+    n_jobs: -1
+
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1"]
+  average: "macro"
+
+split:
+  test_ratio: 0.2
+  validation_ratio: 0.0
+  random_seed: 42
+
+experiment:
+  experiment_name: "penguin_grid_search"
+  run_name: "svm_grid"

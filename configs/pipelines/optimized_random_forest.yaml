@@ -1,0 +1,47 @@
+dataset:
+  filepath: "data/penguins_size.csv"
+  target_column: "species"
+  null_values: ["NA", "."]
+
+preprocessing:
+  categorical_features: ["island", "sex"]
+  numeric_features:
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  fill_strategy: "median"
+
+features:
+  features_to_use:
+    - "island_encoded"
+    - "sex_encoded"
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  normalize: true
+
+model:
+  model_type: "random_forest"
+  hyperparameters:
+    n_estimators: 500
+    max_depth: null
+    min_samples_split: 5
+    min_samples_leaf: 2
+    bootstrap: true
+    class_weight: "balanced"
+    random_state: 42
+
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1", "roc_auc"]
+  average: "macro"
+
+split:
+  test_ratio: 0.2
+  validation_ratio: 0.1
+  random_seed: 42
+
+experiment:
+  experiment_name: "penguin_optimized_classification"
+  run_name: "random_forest_optimized"

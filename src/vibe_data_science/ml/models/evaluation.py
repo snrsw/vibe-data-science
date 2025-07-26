@@ -11,6 +11,7 @@ from sklearn.metrics import (
     f1_score,
     confusion_matrix,
     classification_report,
+    roc_auc_score,
 )
 
 
@@ -26,7 +27,14 @@ class EvaluationConfig(BaseModel):
     @field_validator("metrics")
     @classmethod
     def validate_metrics(cls, v: tuple[str, ...]) -> tuple[str, ...]:
-        allowed_metrics = ["accuracy", "precision", "recall", "f1"]
+        allowed_metrics = [
+            "accuracy",
+            "precision",
+            "recall",
+            "f1",
+            "roc_auc",
+            "confusion_matrix",
+        ]
         for metric in v:
             if metric not in allowed_metrics:
                 raise ValueError(
@@ -66,6 +74,17 @@ def calculate_metrics(
         results["f1"] = float(
             f1_score(y_true, y_pred, average=config.average, zero_division=0)
         )
+
+    if "roc_auc" in config.metrics:
+        try:
+            # For binary classification or multi-class with OvR strategy
+            results["roc_auc"] = float(
+                roc_auc_score(y_true, y_pred, multi_class="ovr", average=config.average)
+            )
+        except (ValueError, TypeError):
+            # If ROC AUC can't be calculated
+            logger.warning("roc_auc_calculation_failed")
+            results["roc_auc"] = float(0.0)
 
     # Calculate confusion matrix
     conf_matrix = confusion_matrix(y_true, y_pred).tolist()
@@ -114,6 +133,13 @@ def evaluate_model(
 
     # Get predictions from model
     y_pred = model.predict(X)
+
+    # Check if model supports probability predictions for ROC AUC
+    if "roc_auc" in config.metrics:
+        try:
+            model.predict_proba
+        except (AttributeError, NotImplementedError):
+            logger.warning("model_does_not_support_predict_proba")
 
     # Calculate metrics
     metrics = calculate_metrics(y_true, y_pred, config)

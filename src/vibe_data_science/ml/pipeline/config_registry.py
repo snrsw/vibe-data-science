@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Literal, Optional
 import structlog
 from pydantic import BaseModel
 
@@ -64,6 +64,33 @@ def create_random_forest_config(
     )
 
 
+def create_random_forest_optimized_config() -> ModelConfig:
+    return ModelConfig(
+        model_type="random_forest",
+        hyperparameters={
+            "n_estimators": 500,
+            "max_depth": None,
+            "min_samples_split": 5,
+            "min_samples_leaf": 2,
+            "bootstrap": True,
+            "class_weight": "balanced",
+            "random_state": 42,
+        },
+    )
+
+
+def create_random_forest_fast_config() -> ModelConfig:
+    return ModelConfig(
+        model_type="random_forest",
+        hyperparameters={
+            "n_estimators": 50,
+            "max_depth": 8,
+            "max_features": "sqrt",
+            "random_state": 42,
+        },
+    )
+
+
 def create_svm_config(
     C: float = 1.0, kernel: str = "rbf", random_state: int = 42
 ) -> ModelConfig:
@@ -73,6 +100,31 @@ def create_svm_config(
             "C": C,
             "kernel": kernel,
             "random_state": random_state,
+        },
+    )
+
+
+def create_svm_linear_config() -> ModelConfig:
+    return ModelConfig(
+        model_type="svm",
+        hyperparameters={
+            "C": 1.0,
+            "kernel": "linear",
+            "random_state": 42,
+        },
+    )
+
+
+def create_svm_optimized_config() -> ModelConfig:
+    return ModelConfig(
+        model_type="svm",
+        hyperparameters={
+            "C": 10.0,
+            "kernel": "rbf",
+            "gamma": "scale",
+            "probability": True,
+            "class_weight": "balanced",
+            "random_state": 42,
         },
     )
 
@@ -138,24 +190,138 @@ def update_config(base_config: BaseModel, **updates) -> BaseModel:
     return type(base_config).model_validate(data)
 
 
+def create_dataset_config(
+    filepath: str = "data/penguins_size.csv",
+    target_column: str = "species",
+    null_values: tuple[str, ...] = ("NA", "."),
+) -> DatasetConfig:
+    return DatasetConfig(
+        filepath=filepath,
+        target_column=target_column,
+        null_values=null_values,
+    )
+
+
+def create_preprocessing_config(
+    categorical_features: tuple[str, ...] = ("island", "sex"),
+    numeric_features: tuple[str, ...] = (
+        "culmen_length_mm",
+        "culmen_depth_mm",
+        "flipper_length_mm",
+        "body_mass_g",
+    ),
+    fill_strategy: Literal["mean", "median", "mode"] = "median",
+) -> PreprocessingConfig:
+    return PreprocessingConfig(
+        categorical_features=categorical_features,
+        numeric_features=numeric_features,
+        fill_strategy=fill_strategy,
+    )
+
+
+def create_feature_config(
+    normalize: bool = True,
+) -> FeatureConfig:
+    return FeatureConfig(
+        features_to_use=(
+            "island_encoded",
+            "sex_encoded",
+            "culmen_length_mm",
+            "culmen_depth_mm",
+            "flipper_length_mm",
+            "body_mass_g",
+        ),
+        normalize=normalize,
+    )
+
+
+def create_evaluation_config(
+    metrics: tuple[str, ...] = ("accuracy", "precision", "recall", "f1"),
+    average: Literal["micro", "macro", "weighted"] = "macro",
+) -> EvaluationConfig:
+    return EvaluationConfig(
+        metrics=metrics,
+        average=average,
+    )
+
+
 def initialize_configs() -> None:
     # Create model configurations
     rf_default = create_random_forest_config()
     rf_deep = create_random_forest_config(n_estimators=200, max_depth=20)
+    rf_optimized = create_random_forest_optimized_config()
+    rf_fast = create_random_forest_fast_config()
     svm_default = create_svm_config()
+    svm_linear = create_svm_linear_config()
+    svm_optimized = create_svm_optimized_config()
 
     # Register model configurations
     register_config("model", "random_forest_default", rf_default)
     register_config("model", "random_forest_deep", rf_deep)
+    register_config("model", "random_forest_optimized", rf_optimized)
+    register_config("model", "random_forest_fast", rf_fast)
     register_config("model", "svm_default", svm_default)
+    register_config("model", "svm_linear", svm_linear)
+    register_config("model", "svm_optimized", svm_optimized)
+
+    # Create dataset configurations
+    default_dataset = create_dataset_config()
+    test_dataset = create_dataset_config(filepath="data/penguins_test.csv")
+
+    # Register dataset configurations
+    register_config("dataset", "default", default_dataset)
+    register_config("dataset", "test", test_dataset)
+
+    # Create preprocessing configurations
+    default_preprocessing = create_preprocessing_config()
+    mean_imputation = create_preprocessing_config(fill_strategy="mean")
+    mode_imputation = create_preprocessing_config(fill_strategy="mode")
+
+    # Register preprocessing configurations
+    register_config("preprocessing", "default", default_preprocessing)
+    register_config("preprocessing", "mean_imputation", mean_imputation)
+    register_config("preprocessing", "mode_imputation", mode_imputation)
+
+    # Create feature configurations
+    default_features = create_feature_config()
+    no_normalization = create_feature_config(normalize=False)
+
+    # Register feature configurations
+    register_config("feature", "default", default_features)
+    register_config("feature", "no_normalization", no_normalization)
+
+    # Create evaluation configurations
+    default_evaluation = create_evaluation_config()
+    full_metrics = create_evaluation_config(
+        metrics=("accuracy", "precision", "recall", "f1", "roc_auc", "confusion_matrix")
+    )
+
+    # Register evaluation configurations
+    register_config("evaluation", "default", default_evaluation)
+    register_config("evaluation", "full_metrics", full_metrics)
 
     # Create and register pipeline configurations
     default_pipeline = create_default_pipeline_config(model_config=rf_default)
     deep_pipeline = create_default_pipeline_config(model_config=rf_deep)
+    fast_pipeline = create_default_pipeline_config(model_config=rf_fast)
+    optimized_rf_pipeline = create_default_pipeline_config(model_config=rf_optimized)
     svm_pipeline = create_default_pipeline_config(model_config=svm_default)
+    optimized_svm_pipeline = create_default_pipeline_config(model_config=svm_optimized)
 
+    # Pipeline with different feature configurations
+    no_norm_pipeline = update_config(default_pipeline, features=no_normalization)
+
+    # Pipeline with different evaluation configurations
+    full_eval_pipeline = update_config(default_pipeline, evaluation=full_metrics)
+
+    # Register all pipeline configurations
     register_config("pipeline", "default", default_pipeline)
     register_config("pipeline", "deep_forest", deep_pipeline)
+    register_config("pipeline", "fast_forest", fast_pipeline)
+    register_config("pipeline", "optimized_forest", optimized_rf_pipeline)
     register_config("pipeline", "svm", svm_pipeline)
+    register_config("pipeline", "optimized_svm", optimized_svm_pipeline)
+    register_config("pipeline", "no_normalization", no_norm_pipeline)
+    register_config("pipeline", "full_evaluation", full_eval_pipeline)
 
     logger.info("configs_initialized")

@@ -1,0 +1,53 @@
+dataset:
+  filepath: "data/penguins_size.csv"
+  target_column: "species"
+  null_values: ["NA", "."]
+
+preprocessing:
+  categorical_features: ["island", "sex"]
+  numeric_features:
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  fill_strategy: "median"
+
+features:
+  features_to_use:
+    - "island_encoded"
+    - "sex_encoded"
+    - "culmen_length_mm"
+    - "culmen_depth_mm"
+    - "flipper_length_mm"
+    - "body_mass_g"
+  normalize: true
+
+model:
+  model_type: "random_forest"
+  # This model will be used as the base for grid search
+  hyperparameters:
+    random_state: 42
+  # Grid search parameters
+  grid_search:
+    param_grid:
+      n_estimators: [50, 100, 200]
+      max_depth: [5, 10, 15, null]
+      min_samples_split: [2, 5]
+      min_samples_leaf: [1, 2]
+      bootstrap: [true]
+    cv: 3
+    scoring: "accuracy"
+    n_jobs: -1
+
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1"]
+  average: "macro"
+
+split:
+  test_ratio: 0.2
+  validation_ratio: 0.0
+  random_seed: 42
+
+experiment:
+  experiment_name: "penguin_grid_search"
+  run_name: "random_forest_grid"
