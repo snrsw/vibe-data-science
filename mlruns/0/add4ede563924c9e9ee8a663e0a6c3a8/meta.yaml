@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/0/add4ede563924c9e9ee8a663e0a6c3a8/artifacts
+end_time: 1753512786219
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: add4ede563924c9e9ee8a663e0a6c3a8
+run_name: worried-mole-764
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753512785827
+status: 3
+tags: []
+user_id: jmb20230001
