@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/0/a7a324e907564db6828afa4a34454eb4/artifacts
+end_time: 1753511195776
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a7a324e907564db6828afa4a34454eb4
+run_name: unique-horse-474
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753511195351
+status: 3
+tags: []
+user_id: jmb20230001

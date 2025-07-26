@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/jmb20230001/src/github.com/snrsw/vibe-data-science/mlruns/0/94cff7b311384a6988514af9a027e7f6/artifacts
+end_time: 1753511158659
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 94cff7b311384a6988514af9a027e7f6
+run_name: caring-goat-339
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753511158219
+status: 3
+tags: []
+user_id: jmb20230001

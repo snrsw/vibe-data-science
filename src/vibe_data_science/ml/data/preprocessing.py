@@ -93,8 +93,7 @@ def encode_single_column(
 ) -> pl.DataFrame:
     encoded_column = (
         pl.col(column_name)
-        .map_elements(lambda val: mapping.get(val, -1))
-        .cast(pl.Int32)
+        .map_elements(lambda val: mapping.get(val, -1), return_dtype=pl.Int32)
         .alias(f"{column_name}_encoded")
     )
     return df.with_columns(encoded_column)
